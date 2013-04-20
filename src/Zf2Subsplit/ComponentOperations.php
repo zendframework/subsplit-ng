@@ -252,8 +252,8 @@ class ComponentOperations
     public function updateBranch($branch, $componentPath = null)
     {
         $this->checkoutBranch($branch, $componentPath);
-//        $this->git->execute('fetch origin');
-//        $this->git->execute('rebase origin/%s', array($branch));
+        $this->git->execute('fetch origin');
+        $this->git->execute('rebase origin/%s', array($branch));
     }
 
     /**
