@@ -13,10 +13,10 @@ Algorithm: Updating branches
       `CURRENT_SHA1=$(git log -1 --format=format:"%H")`
     - [X] get timestamp from last update
       `PREVIOUS_TS=$(git log --format=format:"%ct" $PREVIOUS_SHA1`
-    - get list of revisions since last update
+    - [X] get list of revisions since last update
       `REVISIONS=$(git log --format=format:"%H" --since=$($PREVIOUS_TS + 1) --reverse`
-    - loop through revisions (they're already in reverse order) and get list of
-      files changed
+    - [X] loop through revisions (they're already in reverse order) and get list
+      of files changed
 
       for REVISION in $REVISIONS;do
           FILES=`git show --name-only --format=format:"%b" $REVISION`
@@ -36,6 +36,8 @@ Algorithm: Creating tags
 ------------------------
 
 - Get sha1 of tag from ZF2 repo, and timestamp of that sha1
+  `git rev-list <tag> | head -1` gets the sha1
+  `git show --format=format:"%ct" <sha1>` returns the timestamp
 - For each component:
   - Get revision of last commit on component's master
   - If revision == zf2 tag sha1, tag; done
@@ -46,6 +48,7 @@ Algorithm: Creating tags
       pop off the last one to get the SHA1+TS of that commit
         - If sha1 == zf2 tag sha1, tag; done
         - If date <= zf2 tag date, tag; done
+- Tagging: `git tag -a -m 'Zend Framework <version> (zf2-sha1)' release-<version> <component sha1>`
 
 Tricks
 ------
