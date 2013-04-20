@@ -4,7 +4,7 @@ namespace Zf2Subsplit;
 
 class ComponentOperations
 {
-    protected $components = array(
+    protected static $components = array(
         'Component_ZendAuthentication' => array(
             'name' => 'Component_ZendAuthentication',
             'path' => 'library/Zend/Authentication/',
@@ -207,7 +207,7 @@ class ComponentOperations
         ),
     );
 
-    protected $componentList;
+    protected static $componentList;
     protected $componentPathMap;
 
     protected $git;
@@ -478,7 +478,7 @@ echo "No suitable commits found in allowed history ({$this->maxTagHistory})\n";
                 continue;
             }
 
-            $components[$component] = $this->components[$component];
+            $components[$component] = static::$components[$component];
         }
         return $components;
     }
@@ -549,7 +549,7 @@ echo "        No component revision information discovered!!!!\n";
             return $this->componentPathMap;
         }
         $components = array();
-        foreach ($this->components as $component) {
+        foreach (static::$components as $component) {
             $components[$component['path']] = $component['name'];
         }
         $this->componentPathMap = $components;
@@ -561,13 +561,13 @@ echo "        No component revision information discovered!!!!\n";
      * 
      * @return array
      */
-    public function getComponentList()
+    public static function getComponentList()
     {
-        if (is_array($this->componentList)) {
-            return $this->componentList;
+        if (is_array(static::$componentList)) {
+            return static::$componentList;
         }
-        $this->componentList = array_keys($this->components);
-        return $this->componentList;
+        static::$componentList = array_keys(static::$components);
+        return static::$componentList;
     }
 
     /**

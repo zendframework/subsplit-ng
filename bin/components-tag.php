@@ -40,7 +40,7 @@ echo "    Revision:  " . $tagInfo['revision'] . "\n";
 echo "    Timestamp: " . $tagInfo['timestamp'] . "\n";
 
 // Loop through comonents and tag
-foreach ($operations->getComponentList() as $component) {
+foreach (ComponentOperations::getComponentList() as $component) {
     echo "Tagging component $component...\n";
     if (!$operations->tagComponent($component, $version, $tagInfo)) {
         echo "    [ FAILED ] tagging $component\n";
