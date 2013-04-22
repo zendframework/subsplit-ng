@@ -52,7 +52,27 @@ A `Makefile` will help you keep up-to-date. Run the following:
 - `make tag VERSION=<version>` will create a tag in each component for the
   matching ZF2 version. You *should* run `make all` first, but if you don't,
   the master branch will be updated prior to tagging.
-- `make push` will push any updates you've made to the component repositories.
+- `make push BRANCH=<branch>` will push any updates you've made to the
+  specified branch of all component repositories. This should be one of "tags"
+  (pushes tags), "master," or "develop."
+
+Typical usage will look like:
+
+```sh
+make update-master
+make push BRANCH=master
+make update-develop
+make push BRANCH=master
+```
+
+When tagging, you'll do the following:
+
+```sh
+make update-master
+make push BRANCH=master
+make tag VERSION=2.2.0
+make push BRANCH=tags
+```
 
 Variables
 ---------
@@ -64,3 +84,4 @@ You may pass any of the following variables on the command line:
 - `RSYNC` - the path to your rsync executable, if not on your `$PATH`
 - `VERSION` - a ZF2 version, such as `2.1.4` or `2.0.8`; used only when calling
   `make tag`
+- `BRANCH` - the branch to push; one of `master`, `develop`, or `tags`.
