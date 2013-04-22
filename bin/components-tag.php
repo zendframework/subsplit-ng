@@ -13,7 +13,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 // Marshal arguments
 if ($argc != 5) {
-    $message  = sprintf("[%s] Invalid arguments (requires 4, received %d)\n", $argv[0], $argc);
+    $message  = sprintf("[%s] Invalid arguments (requires 4, received %d)\n", $argv[0], $argc - 1);
     $message .= sprintf("Usage:\n    %s [version] [zf2_path] [repo_path] [git executable]\n", $argv[0]);
     file_put_contents('php://stderr', $message);
     exit(1);

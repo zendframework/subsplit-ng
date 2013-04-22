@@ -30,7 +30,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 // Marshal arguments
 if ($argc != 7) {
-    $message  = sprintf("[%s] Invalid arguments (requires 6, received %d)\n", $argv[0], $argc);
+    $message  = sprintf("[%s] Invalid arguments (requires 6, received %d)\n", $argv[0], $argc - 1);
     $message .= sprintf("Usage:\n    %s [zf2_path] [branch] [SHA1:TS] [repo_path] [git executable] [rsync executable]\n", $argv[0]);
     file_put_contents('php://stderr', $message);
     exit(1);
