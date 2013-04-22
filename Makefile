@@ -28,9 +28,9 @@ update-master :
 ifneq "$(ZF2_MASTER_PREV)" "$(ZF2_MASTER_INFO)"
 	@echo "Updating master branch..."
 	-$(PHP) $(CURDIR)/bin/components-update.php "$(ZF2_DIR)" "master" "$(ZF2_MASTER_PREV)" "$(REPOS_DIR)" "$(GIT)" "$(RSYNC)"
+	-echo $(ZF2_MASTER_INFO) > $(ZF2_MASTER_MARKER)
 	@echo "[DONE] Updating master branch."
 else
-	-echo $(ZF2_MASTER_INFO) > $(ZF2_MASTER_MARKER)
 	@echo "Master branch is already up-to-date"
 endif
 
