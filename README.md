@@ -45,8 +45,10 @@ Usage
 
 A `Makefile` will help you keep up-to-date. Run the following:
 
-- `make all` will update both the master and develop branches of each
-  repository.
+- `make usage` will show you usage, and also show what versions each of master
+  and develop will be updated to.
+- `make update-master` will update both the master branch of each repository.
+- `make update-develop` will update both the develop branch of each repository.
 - `make tag VERSION=<version>` will create a tag in each component for the
   matching ZF2 version. You *should* run `make all` first, but if you don't,
   the master branch will be updated prior to tagging.

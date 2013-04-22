@@ -16,13 +16,23 @@ ZF2_DEVELOP_PREV := $(shell cat $(ZF2_DEVELOP_MARKER))
 ZF2_MASTER_INFO := $(shell $(CURDIR)/bin/zf2-update.sh $(ZF2_DIR) master $(GIT))
 ZF2_DEVELOP_INFO := $(shell $(CURDIR)/bin/zf2-update.sh $(ZF2_DIR) develop $(GIT))
 
-.PHONY : all push tag update-develop update-master verify-version
+.PHONY : all push tag update-develop update-master usage verify-version
 
-all : update-master update-develop
+all : usage
+
+usage : 
+	@echo "This is a summary of what will happen if you update:"
+	@echo ""
 	@echo "PREVIOUS master revision info:  $(ZF2_MASTER_PREV)"
 	@echo "PREVIOUS develop revision info: $(ZF2_DEVELOP_PREV)"
 	@echo "NEW master revision info:       $(ZF2_MASTER_INFO)"
 	@echo "NEW develop revision info:      $(ZF2_DEVELOP_INFO)"
+	@echo ""
+	@echo "Run 'make update-master' and/or 'make update-develop', followed by 'make push'"
+	@echo "in order to update the repositories."
+	@echo ""
+	@echo "Run 'make tag VERSION=<version>' to release a new tag."
+	@echo "Do this only after running 'update-master'!"
 
 update-master :
 ifneq "$(ZF2_MASTER_PREV)" "$(ZF2_MASTER_INFO)"
