@@ -27,7 +27,7 @@ all : update-master update-develop
 update-master :
 ifneq "$(ZF2_MASTER_PREV)" "$(ZF2_MASTER_INFO)"
 	@echo "Updating master branch..."
-	-$(PHP) $(CURDIR)/bin/components-update.php "$(ZF2_DIR)" "master" "$(ZF2_MASTER_INFO)" "$(REPOS_DIR)" "$(GIT)" "$(RSYNC)"
+	-$(PHP) $(CURDIR)/bin/components-update.php "$(ZF2_DIR)" "master" "$(ZF2_MASTER_PREV)" "$(REPOS_DIR)" "$(GIT)" "$(RSYNC)"
 	@echo "[DONE] Updating master branch."
 else
 	-echo $(ZF2_MASTER_INFO) > $(ZF2_MASTER_MARKER)
@@ -37,7 +37,7 @@ endif
 update-develop :
 ifneq "$(ZF2_DEVELOP_PREV)" "$(ZF2_DEVELOP_INFO)"
 	@echo "Updating develop branch..."
-	-$(PHP) $(CURDIR)/bin/components-update.php "$(ZF2_DIR)" "develop" "$(ZF2_DEVELOP_INFO)" "$(REPOS_DIR)" "$(GIT)" "$(RSYNC)"
+	-$(PHP) $(CURDIR)/bin/components-update.php "$(ZF2_DIR)" "develop" "$(ZF2_DEVELOP_PREV)" "$(REPOS_DIR)" "$(GIT)" "$(RSYNC)"
 	-echo $(ZF2_DEVELOP_INFO) > $(ZF2_DEVELOP_MARKER)
 	@echo "[DONE] Updating develop branch."
 else
