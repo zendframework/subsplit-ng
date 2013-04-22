@@ -57,5 +57,5 @@ endif
 
 push :
 	@echo "Pushing component repositories..."
-	-$(PHP) $(CURDIR)/bin/push-repos.php "$(GIT)"
+	-$(PHP) $(CURDIR)/bin/push-repos.php "$(GIT)" "$(REPOS_DIR)"
 	@echo "[DONE] Pushing component repositories."
