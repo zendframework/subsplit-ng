@@ -2,3 +2,4 @@ repos/zf2/
 repos/Component_*/
 repos/*.tgz
 vendor/
+*.log
