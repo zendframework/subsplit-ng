@@ -35,23 +35,26 @@ $rsync      = new Rsync();
 $operations = new ComponentOperations($git, $rsync, $zf2Path, $reposPath);
 
 foreach (ComponentOperations::getComponentList() as $component) {
-    echo "Pushing $component...\n";
     $componentPath = sprintf('%s/%s', $reposPath, $component);
     switch ($branch) {
         case 'tags':
+            echo "Pushing $component...\n";
             echo "    Pushing tags\n";
             chdir($componentPath);
             $git->execute('push --tags origin');
+            echo "[DONE]\n";
             break;
         case 'master':
         case 'develop':
         default:
             $operations->checkoutBranch($branch, $componentPath);
-            if ($git->stat($branch)) {
-                printf("    Pushing %s branch\n", $branch);
-                $git->execute('push origin %s:%s', array($branch, $branch));
+            if (!$git->stat($branch)) {
+                break;
             }
+            echo "Pushing $component...\n";
+            printf("    Pushing %s branch\n", $branch);
+            $git->execute('push origin %s:%s', array($branch, $branch));
+            echo "[DONE]\n";
             break;
     }
-    echo "[DONE]\n";
 }
