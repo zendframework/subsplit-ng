@@ -39,9 +39,47 @@ order to do this). This will setup autoloading.
 Next, execute `bin/clone-repos.php`. This will clone the ZF2 and all component
 repositories into your `repos/` directory, ensuring that the master and develop
 branches have been checked out.
- 
+
 Usage
 -----
+
+Typical usage will be to invoke the `bin/run-updates.sh` script. This script
+essentially does the following from within the project root:
+
+```sh
+make update-master
+make push BRANCH=master
+make update-develop
+make push BRANCH=develop
+```
+
+When using with crontab, you may need to indicate the paths to PHP and/or Git
+to ensure it works correctly, depending on how you have things setup on your
+path. For instance: 
+
+- if you have multiple PHP binaries, and want to use a specific one
+- if you use the [hub](https://github.com/defunkt/hub) command, your git
+  "executable" is likely an alias or function, which may not resolve correctly
+  in crontab
+
+As such, usage will look like:
+
+```sh
+export GIT=/usr/local/bin/git ; PHP=$HOME/bin/php-5.4 ; $HOME/git/subsplit-ng/bin/run-updates.sh
+```
+
+Within a crontab, your git environment may not be setup correctly. To ensure it
+is, source your shell profile -- usually something like `source $HOME/.profile`
+or similar.
+
+As a full example on the crontab:
+
+```crontab
+0 * * * * source $HOME/.profile && (export GIT=/usr/local/bin/git ; PHP=$HOME/bin/php-5.4 ; $HOME/git/subsplit-ng/bin/run-updates.sh 2>&1 | tee -a $HOME/git/subsplit-ng/update.log)
+```
+ 
+Make Usage
+----------
 
 A `Makefile` will help you keep up-to-date. Run the following:
 
@@ -62,7 +100,7 @@ Typical usage will look like:
 make update-master
 make push BRANCH=master
 make update-develop
-make push BRANCH=master
+make push BRANCH=develop
 ```
 
 When tagging, you'll do the following:
