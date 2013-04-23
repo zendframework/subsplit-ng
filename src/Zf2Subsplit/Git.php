@@ -48,4 +48,15 @@ class Git
 
         system($command);
     }
+
+    public function stat($branch)
+    {
+        $command = 'log --format=format:"%%H" origin/%s..%s';
+        $stat    = $this->execute($command, array($branch, $branch), true);
+        $stat    = trim($stat);
+        if (empty($stat)) {
+            return false;
+        }
+        return true;
+    }
 }

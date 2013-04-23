@@ -46,9 +46,11 @@ foreach (ComponentOperations::getComponentList() as $component) {
         case 'master':
         case 'develop':
         default:
-            printf("    Pushing %s branch\n", $branch);
             $operations->checkoutBranch($branch, $componentPath);
-            $git->execute('push origin %s:%s', array($branch, $branch));
+            if ($git->stat($branch)) {
+                printf("    Pushing %s branch\n", $branch);
+                $git->execute('push origin %s:%s', array($branch, $branch));
+            }
             break;
     }
     echo "[DONE]\n";
