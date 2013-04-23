@@ -251,9 +251,9 @@ class ComponentOperations
      */
     public function updateBranch($branch, $componentPath = null)
     {
-        $this->checkoutBranch($branch, $componentPath);
         $this->git->execute('fetch origin');
-        $this->git->execute('rebase origin/%s', array($branch));
+        $this->git->execute('rebase origin/%s %s', array($branch, $branch));
+        $this->checkoutBranch($branch, $componentPath);
     }
 
     /**
@@ -353,6 +353,7 @@ echo "    Updating component {$component['name']}\n";
         $componentPath = sprintf('%s/%s', $this->repoPath, $component['name']);
 
         // Ensure branch is up-to-date
+        chdir($componentPath);
         $this->updateBranch($branch, $componentPath);
 
         // Get latest revision on component branch, and determine if we need to update the component.
