@@ -1,6 +1,10 @@
 ZF2 Component Subsplits
 =======================
 
+> ## Repository abandoned 2019-12-05
+>
+> This repository is no longer maintained.
+
 Zend Framework 2 development is done in the zendframework/zf2 repository,
 allowing for greater ease in testing components, particularly those that
 have dependencies on others.
